@@ -23,8 +23,12 @@ namespace SpanningTree
         }
         private static void CalcTree()
         {
+            var changed = false;
+
             for (var i = 0; i < _depth; i++) //run process multiple times
             {
+                changed = false;
+
                 foreach (var vtx in _graph.Vertices) //run foreach vertex
                 {
                     var edges = _graph.Edges.Where(x => x.Vertex1 == vtx.ID || x.Vertex2 == vtx.ID); //get adjacent edges from vertex
@@ -43,9 +47,13 @@ namespace SpanningTree
                             v.RootID = vtx.RootID; // adjacent vertex root is same then vertex
                             v.RootWeight = vtx.RootWeight;  // weight of root vertex are the same
                             v.Cost = vtx.Cost + edge.Weight; // cost is vertex + weight of edge
+                            changed = true; //something changed --> possibly not last iteration
                         }
                     }
                 }
+
+                if(!changed) //nothing has changed --> last iteration
+                    return;
             }
         }
         private static List<Edge> GetMinSpanningTree()
