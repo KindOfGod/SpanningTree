@@ -9,7 +9,7 @@ namespace SpanningTree
         private static readonly int _depth = 20;
         private static void Main(string[] args) 
         {
-            ParseInput("E:\\C# Projects\\SpanningTree\\input.txt"); // initialise all vertexes with themselfs as root nodes
+            ParseInput("input.txt"); // initialise all vertexes with themselfs as root nodes
             //at start each vertex thinks it is the root so ToRootId = Id, RootWeight = Weight, RootId = Id, Cost = 0 (already at root)
 
             var rnd = new Random();
@@ -20,6 +20,7 @@ namespace SpanningTree
             var res = GetMinSpanningTree();
 
             OutputSpanningTree(res);
+            Console.ReadKey();
         }
         private static void CalcTree()
         {
